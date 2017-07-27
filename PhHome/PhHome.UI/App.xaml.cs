@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PhHome.UI.Services.Theming;
+using PhHome.UI.Views;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -41,21 +43,21 @@ namespace PhHome.UI
         {
             Frame rootFrame = Window.Current.Content as Frame;
 
-            // Ne répétez pas l'initialisation de l'application lorsque la fenêtre comporte déjà du contenu,
-            // assurez-vous juste que la fenêtre est active
+            // Do not repeat app initialization when the Window already has content,
+            // just ensure that the window is active
             if (rootFrame == null)
             {
-                // Créez un Frame utilisable comme contexte de navigation et naviguez jusqu'à la première page
+                // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-                    //TODO: chargez l'état de l'application précédemment suspendue
+                    //TODO: Load state from previously suspended application
                 }
 
-                // Placez le frame dans la fenêtre active
+                // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
 
@@ -63,12 +65,13 @@ namespace PhHome.UI
             {
                 if (rootFrame.Content == null)
                 {
-                    // Quand la pile de navigation n'est pas restaurée, accédez à la première page,
-                    // puis configurez la nouvelle page en transmettant les informations requises en tant que
-                    // paramètre
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    // When the navigation stack isn't restored navigate to the first page,
+                    // configuring the new page by passing required information as a navigation
+                    // parameter
+                    Theme.ApplyToContainer();
+                    rootFrame.Navigate(typeof(Shell), e.Arguments);
                 }
-                // Vérifiez que la fenêtre actuelle est active
+                // Ensure the current window is active
                 Window.Current.Activate();
             }
         }
