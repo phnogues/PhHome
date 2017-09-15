@@ -1,8 +1,11 @@
-﻿using System;
+﻿using OpenZWave;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security;
+using Windows.Devices.Enumeration;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,6 +28,16 @@ namespace PhHome.UI.Views
         public ShuttersPage()
         {
             this.InitializeComponent();
+
+            init();
+        }
+
+        private async void init()
+        {
+            var serialPortSelector = Windows.Devices.SerialCommunication.SerialDevice.GetDeviceSelector();
+            var devices = await DeviceInformation.FindAllAsync(serialPortSelector);
+            var serialPort = devices.First().Id; //Adjust to pick the right port for your usb stick
+            ZWManager.Instance.AddDriver(serialPort); //Add the serial port (you can have multiple!)
         }
     }
 }

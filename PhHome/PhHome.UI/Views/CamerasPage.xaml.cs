@@ -22,6 +22,7 @@ namespace PhHome.UI.Views
     /// </summary>
     public sealed partial class CamerasPage : Page
     {
+        
         public CamerasPage()
         {
             this.InitializeComponent();

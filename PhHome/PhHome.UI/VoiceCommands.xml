@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.2">
+  <CommandSet xml:lang="fr-FR" Name="PhHome_CommandSet_en">
+    <AppName>PhHome</AppName>
+    <Example>PhHome, Ouvre le volet de la cuisine</Example>
+      
+    <Command Name="openShutter">
+      <Example>Ouvre le volet de la cuisine</Example>
+      <ListenFor RequireAppName="BeforePhrase"> Ouvre le volet {volet} </ListenFor>
+      <Feedback> Ok ma poule, j'ouvre le volet {volet} , par contre bouge toi le cul a les brancher car ça ne marche pas !</Feedback>
+      <VoiceCommandService Target="PhHomeVoiceCommandService"/>
+    </Command>
+ 
+    <PhraseList Label="volet">
+      <Item>de la cuisine</Item>
+      <Item>du salon</Item>
+      <Item>de la salle</Item>
+    </PhraseList>
+  </CommandSet>
+</VoiceCommands>
